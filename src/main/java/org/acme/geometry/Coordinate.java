@@ -11,12 +11,25 @@ public class Coordinate {
 		this.y = y;
 	}
 
+	public Coordinate () {
+		this.x = Double.NaN;
+		this.y = Double.NaN;
+	}
 	public double getX() {
 		return x;
 	}
 
 	public double getY() {
 		return y;
+	}
+	
+	public boolean isEmpty() {
+		return (Double.isNaN(this.x) || Double.isNaN(this.y));
+	}
+	
+	public String toString() {
+		String result = "["+Double.toString(this.x)+","+Double.toString(this.y)+"]";
+		return result;
 	}
 	
 	
