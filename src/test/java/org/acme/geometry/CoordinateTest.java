@@ -9,7 +9,6 @@ public class CoordinateTest {
 
 	@Test
 	public void testConstructorXY(){
-		// TODO
 		Coordinate c = new Coordinate(3.0,4.0);
 		Assert.assertEquals(3.0, c.getX(), EPSILON);
 		Assert.assertEquals(4.0, c.getY(), EPSILON);
@@ -19,7 +18,6 @@ public class CoordinateTest {
 	
 	@Test
 	public void testConstructorEmpty(){
-		// TODO
 		Coordinate c = new Coordinate();
 		Assert.assertEquals(Double.NaN, c.getX(), EPSILON);
 		Assert.assertEquals(Double.NaN, c.getY(), EPSILON);
@@ -29,7 +27,6 @@ public class CoordinateTest {
 	
 	@Test
 	public void testConstructorHalfEmpty(){
-		// TODO
 		Coordinate c = new Coordinate(3.5, Double.NaN);
 		Assert.assertEquals(3.5, c.getX(), EPSILON);
 		Assert.assertEquals(Double.NaN, c.getY(), EPSILON);
