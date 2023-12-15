@@ -1,4 +1,8 @@
 package org.acme.geometry;
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
+import java.io.UnsupportedEncodingException;
+
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -54,13 +58,49 @@ public class PointTest {
 	}
 
 	@Test
-	public void testGetEnveiope(){
+	public void testGetEnvelope(){
 		Point p = createPoint();
 		Envelope e = p.getEnvelope();
 		Assert.assertEquals(e.getXmin(), p.getCoordinate().getX(), EPSILON);
 		Assert.assertEquals(e.getXmax(), p.getCoordinate().getX(), EPSILON);
 		Assert.assertEquals(e.getYmin(), p.getCoordinate().getY(), EPSILON);
 		Assert.assertEquals(e.getYmax(), p.getCoordinate().getY(), EPSILON);
+	}
+	
+	@Test
+	public void testLogGeometryVisitor(){
+		Point p = createPoint();
+		ByteArrayOutputStream os = new ByteArrayOutputStream();
+		PrintStream out = new PrintStream(os);
+		LogGeometryVisitor visitor = new LogGeometryVisitor(out);
+		p.accept(visitor);
+		// result contiendra ce qui est écrit dans la console
+		String result;
+		try {
+			result = os.toString("UTF8");
+			Assert.assertEquals("Je suis un point avec x=3.0 et y=4.0.", result);
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	@Test
+	public void testLogGeometryVisitorEmpty(){
+		Point p = new Point();
+		ByteArrayOutputStream os = new ByteArrayOutputStream();
+		PrintStream out = new PrintStream(os);
+		LogGeometryVisitor visitor = new LogGeometryVisitor(out);
+		p.accept(visitor);
+		// result contiendra ce qui est écrit dans la console
+		String result;
+		try {
+			result = os.toString("UTF8");
+			Assert.assertEquals("Je suis un point vide.", result);
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 }
 

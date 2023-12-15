@@ -16,10 +16,11 @@ public class Envelope {
 			this.bottomLeft = bottomLeft;
 			this.topRight = topRight;
 		}
+		else{throw new RuntimeException("coodinates don't match top right and bottom left corners");}
 	}
 	
 	public boolean isEmpty() {
-		return (this.bottomLeft.isEmpty() && this.topRight.isEmpty());
+		return this.bottomLeft.isEmpty() && this.topRight.isEmpty();
 	}
 	
 	public double getXmin() {
@@ -38,9 +39,9 @@ public class Envelope {
 		return this.topRight.getY();
 	}
 	
+	@Override
 	public String toString() {
-		String res = this.bottomLeft.toString() + "," +this.topRight.toString();
-		return res;
+		return this.bottomLeft.toString() + "," +this.topRight.toString();
 	}
 
 }

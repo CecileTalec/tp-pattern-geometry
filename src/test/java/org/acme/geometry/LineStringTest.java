@@ -1,5 +1,8 @@
 package org.acme.geometry;
 
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -83,5 +86,40 @@ public class LineStringTest {
 		Assert.assertEquals(e.getYmin(), 4.0, EPSILON);
 		Assert.assertEquals(e.getYmax(), 5.0, EPSILON);
 	}
-
+	
+	@Test
+	public void testLogGeometryVisitor(){
+		LineString l = createLineString();
+		ByteArrayOutputStream os = new ByteArrayOutputStream();
+		PrintStream out = new PrintStream(os);
+		LogGeometryVisitor visitor = new LogGeometryVisitor(out);
+		l.accept(visitor);
+		// result contiendra ce qui est écrit dans la console
+		String result;
+		try {
+			result = os.toString("UTF8");
+			Assert.assertEquals("Je suis une polyligne définie par 2 point(s).", result);
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	@Test
+	public void testLogGeometryVisitorEmpty(){
+		LineString l = new LineString();
+		ByteArrayOutputStream os = new ByteArrayOutputStream();
+		PrintStream out = new PrintStream(os);
+		LogGeometryVisitor visitor = new LogGeometryVisitor(out);
+		l.accept(visitor);
+		// result contiendra ce qui est écrit dans la console
+		String result;
+		try {
+			result = os.toString("UTF8");
+			Assert.assertEquals("Je suis une polyligne vide.", result);
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 }

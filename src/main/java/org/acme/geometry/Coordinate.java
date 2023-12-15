@@ -26,12 +26,12 @@ public class Coordinate {
 	}
 	
 	public boolean isEmpty() {
-		return (Double.isNaN(this.x) || Double.isNaN(this.y));
+		return Double.isNaN(this.x) || Double.isNaN(this.y);
 	}
 	
+	@Override
 	public String toString() {
-		String result = "["+Double.toString(this.x)+","+Double.toString(this.y)+"]";
-		return result;
+		return "["+Double.toString(this.x)+","+Double.toString(this.y)+"]";
 	}
 	
 	

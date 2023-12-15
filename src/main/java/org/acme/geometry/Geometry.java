@@ -12,4 +12,6 @@ public interface Geometry {
 	
 	abstract Geometry clone();
 	
+	abstract void accept(GeometryVisitor visitor);
+	
 }
