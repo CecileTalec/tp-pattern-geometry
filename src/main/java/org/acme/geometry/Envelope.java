@@ -19,7 +19,7 @@ public class Envelope {
 	}
 	
 	public boolean isEmpty() {
-		return (this.bottomLeft.isEmpty() && this.topRight.isEmpty());
+		return this.bottomLeft.isEmpty() && this.topRight.isEmpty();
 	}
 	
 	public double getXmin() {
@@ -38,9 +38,9 @@ public class Envelope {
 		return this.topRight.getY();
 	}
 	
+	@Override
 	public String toString() {
-		String res = this.bottomLeft.toString() + "," +this.topRight.toString();
-		return res;
+		return this.bottomLeft.toString() + "," +this.topRight.toString();
 	}
 
 }

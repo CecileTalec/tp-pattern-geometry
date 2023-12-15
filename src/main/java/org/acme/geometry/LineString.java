@@ -60,11 +60,11 @@ public class LineString implements Geometry {
 	@Override 
 	public LineString clone() {
 		if (!this.isEmpty()) {
-			List<Point> points_clone = new ArrayList<Point>();
+			List<Point> pointsClone = new ArrayList<Point>();
 			for (Point point : points) {
-				points_clone.add(point.clone());
+				pointsClone.add(point.clone());
 			}
-			return new LineString(points_clone);
+			return new LineString(pointsClone);
 		}
 		else {return new LineString();}
 	}
