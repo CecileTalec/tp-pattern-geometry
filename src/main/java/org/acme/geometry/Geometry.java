@@ -4,4 +4,6 @@ public interface Geometry {
 
 	abstract String getType();
 	
+	abstract boolean isEmpty();
+	
 }

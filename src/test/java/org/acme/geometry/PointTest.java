@@ -10,6 +10,7 @@ public class PointTest {
 		Point p = new Point(c);
 		Assert.assertEquals(c, p.getCoordinate());
 		Assert.assertEquals("Point", p.getType());
+		Assert.assertFalse(p.isEmpty());
 	}
 	
 	@Test
@@ -17,6 +18,15 @@ public class PointTest {
 		Point p = new Point();
 		Assert.assertTrue(p.getCoordinate().isEmpty());
 		Assert.assertEquals("Point", p.getType());
+		Assert.assertTrue(p.isEmpty());
+	}
+	
+	@Test
+	public void testConstructorNull(){
+		Point p = new Point(null);
+		Assert.assertTrue(p.getCoordinate().isEmpty());
+		Assert.assertEquals("Point", p.getType());
+		Assert.assertTrue(p.isEmpty());
 	}
 
 }

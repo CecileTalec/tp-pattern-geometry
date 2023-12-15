@@ -20,6 +20,7 @@ public class LineStringTest {
 		LineString l = new LineString(liste_points);
 		Assert.assertEquals(2, l.getNumPoints());
 		Assert.assertEquals("LineString", l.getType());
+		Assert.assertFalse(l.isEmpty());
 	}
 	
 	@Test
@@ -41,6 +42,15 @@ public class LineStringTest {
 		LineString l = new LineString();
 		Assert.assertEquals(0, l.getNumPoints());
 		Assert.assertEquals("LineString", l.getType());
+		Assert.assertTrue(l.isEmpty());
+	}
+	
+	@Test
+	public void testConstructorNull(){
+		LineString l = new LineString(null);
+		Assert.assertEquals(0, l.getNumPoints());
+		Assert.assertEquals("LineString", l.getType());
+		Assert.assertTrue(l.isEmpty());
 	}
 
 }
