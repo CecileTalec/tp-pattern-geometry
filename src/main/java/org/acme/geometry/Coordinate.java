@@ -2,6 +2,8 @@ package org.acme.geometry;
 
 public class Coordinate {
 	
+	public static final Coordinate EMPTY = new Coordinate();
+	
 	private double x;
 	
 	private double y;
