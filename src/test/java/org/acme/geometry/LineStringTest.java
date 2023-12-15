@@ -13,7 +13,7 @@ public class LineStringTest {
 	public static LineString createLineString() {
 		Coordinate c = new Coordinate (3.0,4.0);
 		Point p = new Point(c);
-		Coordinate c2 = new Coordinate (4.0,4.0);
+		Coordinate c2 = new Coordinate (2.0,5.0);
 		Point p2 = new Point(c2);
 		List<Point> liste_points = new ArrayList<Point>();
 		liste_points.add(p);
@@ -59,8 +59,8 @@ public class LineStringTest {
 		l.translate(2.0, 1.3);
 		Assert.assertEquals(5.0, l.getPointN(0).getCoordinate().getX(),EPSILON);
 		Assert.assertEquals(5.3, l.getPointN(0).getCoordinate().getY(),EPSILON);
-		Assert.assertEquals(6.0, l.getPointN(1).getCoordinate().getX(),EPSILON);
-		Assert.assertEquals(5.3, l.getPointN(1).getCoordinate().getY(),EPSILON);
+		Assert.assertEquals(4.0, l.getPointN(1).getCoordinate().getX(),EPSILON);
+		Assert.assertEquals(6.3, l.getPointN(1).getCoordinate().getY(),EPSILON);
 	}
 	
 	@Test
@@ -72,6 +72,16 @@ public class LineStringTest {
 			Assert.assertEquals(l.getPointN(i).getCoordinate().toString(), lC.getPointN(i).getCoordinate().toString());
 			Assert.assertNotSame(l.getPointN(i),lC.getPointN(i));
 		}
+	}
+	
+	@Test
+	public void testGetEnveiope(){
+		LineString l = createLineString();
+		Envelope e = l.getEnvelope();
+		Assert.assertEquals(e.getXmin(), 2.0, EPSILON);
+		Assert.assertEquals(e.getXmax(), 3.0, EPSILON);
+		Assert.assertEquals(e.getYmin(), 4.0, EPSILON);
+		Assert.assertEquals(e.getYmax(), 5.0, EPSILON);
 	}
 
 }

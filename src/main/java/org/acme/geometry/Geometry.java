@@ -8,6 +8,8 @@ public interface Geometry {
 	
 	abstract void translate(double dx, double dy);
 	
+	abstract Envelope getEnvelope();
+	
 	abstract Geometry clone();
 	
 }

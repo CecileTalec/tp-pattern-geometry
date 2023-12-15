@@ -22,6 +22,9 @@ public class EnvelopeBuilderTest {
 		Envelope e = b.build();
 		Assert.assertFalse(e.isEmpty());
 		Assert.assertEquals(3.3,e.getXmax(),EPSILON);
+		Assert.assertEquals(1.5,e.getXmin(),EPSILON);
+		Assert.assertEquals(5.1,e.getYmax(),EPSILON);
+		Assert.assertEquals(4.2,e.getYmin(),EPSILON);
 	}
 
 }
