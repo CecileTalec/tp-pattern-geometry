@@ -8,4 +8,6 @@ public interface Geometry {
 	
 	abstract void translate(double dx, double dy);
 	
+	abstract Geometry clone();
+	
 }
