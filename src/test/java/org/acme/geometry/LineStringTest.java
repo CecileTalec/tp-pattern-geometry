@@ -10,8 +10,7 @@ public class LineStringTest {
 	
 	public static final double EPSILON = 1.0e-15;
 	
-	@Test
-	public void testConstructorL(){
+	public static LineString createLineString() {
 		Coordinate c = new Coordinate (3.0,4.0);
 		Point p = new Point(c);
 		Coordinate c2 = new Coordinate (4.0,4.0);
@@ -20,6 +19,12 @@ public class LineStringTest {
 		liste_points.add(p);
 		liste_points.add(p2);
 		LineString l = new LineString(liste_points);
+		return l;
+	}
+	
+	@Test
+	public void testConstructorL(){
+		LineString l = createLineString();
 		Assert.assertEquals(2, l.getNumPoints());
 		Assert.assertEquals("LineString", l.getType());
 		Assert.assertFalse(l.isEmpty());
@@ -27,15 +32,8 @@ public class LineStringTest {
 	
 	@Test
 	public void testGetPointN(){
-		Coordinate c = new Coordinate (3.0,4.0);
-		Point p = new Point(c);
-		Coordinate c2 = new Coordinate (4.0,4.0);
-		Point p2 = new Point(c2);
-		List<Point> liste_points = new ArrayList<Point>();
-		liste_points.add(p);
-		liste_points.add(p2);
-		LineString l = new LineString(liste_points);
-		Assert.assertEquals(p, l.getPointN(0));
+		LineString l = createLineString();
+		Assert.assertEquals("[3.0,4.0]", l.getPointN(0).getCoordinate().toString());
 		Assert.assertEquals("LineString", l.getType());
 	}
 	
@@ -57,14 +55,7 @@ public class LineStringTest {
 	
 	@Test
 	public void testTranslate(){
-		Coordinate c = new Coordinate (3.0,4.0);
-		Point p = new Point(c);
-		Coordinate c2 = new Coordinate (4.0,4.0);
-		Point p2 = new Point(c2);
-		List<Point> liste_points = new ArrayList<Point>();
-		liste_points.add(p);
-		liste_points.add(p2);
-		LineString l = new LineString(liste_points);
+		LineString l = createLineString();
 		l.translate(2.0, 1.3);
 		Assert.assertEquals(5.0, l.getPointN(0).getCoordinate().getX(),EPSILON);
 		Assert.assertEquals(5.3, l.getPointN(0).getCoordinate().getY(),EPSILON);
@@ -74,19 +65,13 @@ public class LineStringTest {
 	
 	@Test
 	public void testClone(){
-		Coordinate c = new Coordinate (3.0,4.0);
-		Point p = new Point(c);
-		Coordinate c2 = new Coordinate (4.0,4.0);
-		Point p2 = new Point(c2);
-		List<Point> liste_points = new ArrayList<Point>();
-		liste_points.add(p);
-		liste_points.add(p2);
-		LineString l = new LineString(liste_points);
+		LineString l = createLineString();
 		LineString lC = l.clone();
-		Assert.assertFalse(l==lC);
-		Assert.assertFalse(l.getPointN(1)==lC.getPointN(1));
-		Assert.assertEquals(l.getPointN(0).getCoordinate().getX(), lC.getPointN(0).getCoordinate().getX(), EPSILON);
-		Assert.assertEquals(l.getPointN(0).getCoordinate().getY(), lC.getPointN(0).getCoordinate().getY(), EPSILON);
+		Assert.assertNotSame(l,lC);
+		for (int i=0; i<lC.getNumPoints(); i++) {
+			Assert.assertEquals(l.getPointN(i).getCoordinate().toString(), lC.getPointN(i).getCoordinate().toString());
+			Assert.assertNotSame(l.getPointN(i),lC.getPointN(i));
+		}
 	}
 
 }

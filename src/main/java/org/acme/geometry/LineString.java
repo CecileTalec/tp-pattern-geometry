@@ -53,8 +53,7 @@ public class LineString implements Geometry {
 		if (!this.isEmpty()) {
 			List<Point> points_clone = new ArrayList<Point>();
 			for (Point point : points) {
-				Point point_clone = point.clone();
-				points_clone.add(point_clone);
+				points_clone.add(point.clone());
 			}
 			return new LineString(points_clone);
 		}

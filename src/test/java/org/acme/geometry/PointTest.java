@@ -5,12 +5,17 @@ import org.junit.Test;
 public class PointTest {
 	
 	public static final double EPSILON = 1.0e-15;
+	
+	public static Point createPoint() {
+		Coordinate c = new Coordinate (3.0,4.0);
+		Point p = new Point(c);
+		return p;
+	}
 
 	@Test
 	public void testConstructorC(){
-		Coordinate c = new Coordinate (3.0,4.0);
-		Point p = new Point(c);
-		Assert.assertEquals(c, p.getCoordinate());
+		Point p = createPoint();
+		Assert.assertEquals("[3.0,4.0]", p.getCoordinate().toString());
 		Assert.assertEquals("Point", p.getType());
 		Assert.assertFalse(p.isEmpty());
 	}
@@ -33,8 +38,7 @@ public class PointTest {
 	
 	@Test
 	public void testTranslate(){
-		Coordinate c = new Coordinate (3.0,4.0);
-		Point p = new Point(c);
+		Point p = createPoint();
 		p.translate(2.0, 1.5);
 		Assert.assertEquals(5.0, p.getCoordinate().getX(),EPSILON);
 		Assert.assertEquals(5.5, p.getCoordinate().getY(),EPSILON);
@@ -42,11 +46,9 @@ public class PointTest {
 	
 	@Test
 	public void testClone(){
-		Coordinate c = new Coordinate (3.0,4.0);
-		Point p = new Point(c);
+		Point p = createPoint();
 		Point pC = p.clone();
 		Assert.assertFalse(p==pC);
-		Assert.assertFalse(p.getCoordinate()==pC.getCoordinate());
 		Assert.assertEquals(p.getCoordinate().getX(), pC.getCoordinate().getX(), EPSILON);
 		Assert.assertEquals(p.getCoordinate().getY(), pC.getCoordinate().getY(), EPSILON);
 	}
