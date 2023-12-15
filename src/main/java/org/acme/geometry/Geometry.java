@@ -6,4 +6,6 @@ public interface Geometry {
 	
 	abstract boolean isEmpty();
 	
+	abstract void translate(double dx, double dy);
+	
 }

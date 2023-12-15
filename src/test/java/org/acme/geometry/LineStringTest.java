@@ -8,6 +8,8 @@ import org.junit.Test;
 
 public class LineStringTest {
 	
+	public static final double EPSILON = 1.0e-15;
+	
 	@Test
 	public void testConstructorL(){
 		Coordinate c = new Coordinate (3.0,4.0);
@@ -51,6 +53,23 @@ public class LineStringTest {
 		Assert.assertEquals(0, l.getNumPoints());
 		Assert.assertEquals("LineString", l.getType());
 		Assert.assertTrue(l.isEmpty());
+	}
+	
+	@Test
+	public void testTranslate(){
+		Coordinate c = new Coordinate (3.0,4.0);
+		Point p = new Point(c);
+		Coordinate c2 = new Coordinate (4.0,4.0);
+		Point p2 = new Point(c2);
+		List<Point> liste_points = new ArrayList<Point>();
+		liste_points.add(p);
+		liste_points.add(p2);
+		LineString l = new LineString(liste_points);
+		l.translate(2.0, 1.3);
+		Assert.assertEquals(5.0, l.getPointN(0).getCoordinate().getX(),EPSILON);
+		Assert.assertEquals(5.3, l.getPointN(0).getCoordinate().getY(),EPSILON);
+		Assert.assertEquals(6.0, l.getPointN(1).getCoordinate().getX(),EPSILON);
+		Assert.assertEquals(5.3, l.getPointN(1).getCoordinate().getY(),EPSILON);
 	}
 
 }

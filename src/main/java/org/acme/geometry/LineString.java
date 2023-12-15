@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LineString implements Geometry {
+	
+	public static final String TYPE = "LineString";
 
 	private List<Point> points;
 	
@@ -28,7 +30,7 @@ public class LineString implements Geometry {
 	
 	@Override
 	public String getType() {
-		return "LineString";
+		return TYPE;
 	}
 	
 	@Override
@@ -36,4 +38,12 @@ public class LineString implements Geometry {
 		return this.points.isEmpty();
 	}
 
+	@Override
+	public void translate(double dx, double dy) {
+		if (!this.isEmpty()) {
+			for (Point point : points) {
+				point.translate(dx, dy);
+			}
+		}
+	}
 }
