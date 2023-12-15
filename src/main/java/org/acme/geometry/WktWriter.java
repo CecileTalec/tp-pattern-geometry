@@ -1,9 +1,11 @@
 package org.acme.geometry;
 
+import java.util.Locale;
+
 public class WktWriter {
 	
 	public String write (Geometry geometry) {
-		String res = geometry.getType().toUpperCase() + "(";
+		String res = geometry.getType().toUpperCase(Locale.ROOT) + "(";
 		if ( geometry instanceof Point ){
 			// traiter le cas Point
 			Point point = (Point)geometry;
