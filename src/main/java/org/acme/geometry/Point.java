@@ -38,6 +38,7 @@ public class Point implements Geometry {
 			double y = this.getCoordinate().getY();
 			this.coordinate = new Coordinate(x+dx, y+dy);
 		}
+		else {throw new RuntimeException("point is empty");}
 	}
 	
 	@Override
@@ -53,6 +54,11 @@ public class Point implements Geometry {
 			return new Point (coordinate);
 		}
 		else {return new Point();}
+	}
+
+	@Override
+	public void accept(GeometryVisitor visitor) {
+		visitor.visit(this);
 	}
 
 }

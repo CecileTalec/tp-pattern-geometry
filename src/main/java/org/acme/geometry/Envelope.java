@@ -16,6 +16,7 @@ public class Envelope {
 			this.bottomLeft = bottomLeft;
 			this.topRight = topRight;
 		}
+		else{throw new RuntimeException("coodinates don't match top right and bottom left corners");}
 	}
 	
 	public boolean isEmpty() {
