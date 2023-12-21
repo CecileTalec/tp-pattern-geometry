@@ -48,15 +48,6 @@ public class LineString extends AbstractGeometry {
 		}
 	}
 	
-	@Override
-	public Envelope getEnvelope() {
-		EnvelopeBuilder b = new EnvelopeBuilder();
-		for (Point point : points) {
-			b.insert(point.getCoordinate());
-		}
-		return b.build();
-	}
-	
 	@Override 
 	public LineString clone() {
 		if (!this.isEmpty()) {
