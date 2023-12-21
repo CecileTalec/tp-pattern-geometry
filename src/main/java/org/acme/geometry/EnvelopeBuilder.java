@@ -4,11 +4,13 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class EnvelopeBuilder {
+public class EnvelopeBuilder implements GeometryVisitor{
 	
 	private List<Double> xVals = new ArrayList<>();
 	
 	private List<Double> yVals = new ArrayList<>();
+	
+	private Envelope envelope;
 	
 	public void insert(Coordinate coordinate) {
 		this.xVals.add(coordinate.getX());
@@ -22,5 +24,26 @@ public class EnvelopeBuilder {
 			return new Envelope(bottomLeft,topRight);
 		}
 		else {return new Envelope();}
+	}
+
+	@Override
+	public void visit(Point point) {
+		this.insert(point.getCoordinate());
+		envelope =  this.build();
+		
+	}
+
+	@Override
+	public void visit(LineString lineString) {
+		for (int i=0; i<lineString.getNumPoints();i++) {
+			Point point = lineString.getPointN(i);
+			this.insert(point.getCoordinate());
+		}
+		envelope = this.build();
+		
+	}
+	
+	public Envelope getEnvelope() {
+		return envelope;
 	}
 }
